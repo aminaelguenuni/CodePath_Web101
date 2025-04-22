@@ -26,22 +26,24 @@ themeButton.addEventListener("click", toggleDarkMode);
 const rsvpButton = document.getElementById('rsvp-button');
 
 // Step 2: Create the addParticipant function
-function addParticipant(event) {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const state = document.getElementById('state').value;
+const addParticipant = (person) => { 
 
     const participantInfo = document.createElement('p');
-    participantInfo.textContent = `🎟️ ${name} from ${state} has RSVP'd.`;
+    participantInfo.textContent = `🎟️ ${person.name} from ${person.state} has RSVP'd.`;
 
     document.querySelector('.rsvp-participants').appendChild(participantInfo);
     document.getElementById('rsvp-form').reset();
 }
 
 const validateForm = () => {
-    event.preventDefault(); 
     let containsErrors = false; 
-    const rsvpInputs = document.getElementById("rsvp-form").elements;
+    let rsvpInputs = document.getElementById("rsvp-form").elements;
+
+    let person = {
+        name: rsvpInputs[0].value,
+        email: rsvpInputs[1].value,
+        state: rsvpInputs[2].value 
+    }
     
     // Loop through all inputs to validate them
     for (let i = 0; i < rsvpInputs.length; i++) {
@@ -59,11 +61,45 @@ const validateForm = () => {
         }
     }
 
-    if (containsErrors === false) {
-        addParticipant();
+    if (!containsErrors) {
+        addParticipant(person); // Make sure to pass the person object
+        toggleModal(person); 
     }
 }
 
 rsvpButton.addEventListener('click', validateForm);
-/*** Animations [PLACEHOLDER] [ADDED IN UNIT 8] ***/
+
 /*** Success Modal [PLACEHOLDER] [ADDED IN UNIT 9] ***/
+const toggleModal = (person) => {
+    let modal = document.getElementById('success-modal');
+    let modalText = document.getElementById('modal-text');
+    
+    // Show modal
+    modal.style.display = 'flex';
+    
+    // Update modal text with personalized message
+    modalText.textContent = `🌟 Thanks for RSVPing, ${person.name}! 🌟 We're excited to see you at the event! ✨`;
+    const intervalId = setInterval(animateImage, 500);
+    // Set modal timeout to 5 seconds
+    setTimeout(() => {
+        modal.style.display = 'none';
+        clearInterval(intervalId);
+        // Reset image rotation when hiding
+        modalImage.style.transform = 'rotate(0deg)';
+    }, 5000);
+}
+
+//image part
+
+// Animation variables (place these at the top of your file, outside any functions)
+let rotateFactor = 0;
+const modalImage = document.querySelector('#success-modal img');
+
+// Animation function
+const animateImage = () => {
+
+    rotateFactor = rotateFactor === 0 ? -10 : 0;
+    
+    modalImage.style.transform = `rotate(${rotateFactor}deg)`;
+    modalImage.style.transition = 'transform 0.3s ease-in-out';
+}
