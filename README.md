@@ -10,7 +10,6 @@ This project was developed as part of the [CodePath Web Development Course](http
 
 **Tech & Tea: Casual Coding Talks** is a fictional event website that invites tech enthusiasts to connect, code, and converse in a laid-back, community-driven setting. It serves as a platform to share event details, promote community learning, and encourage engagement through RSVP forms and informative links.
 
-The event's tone is inclusive, beginner-friendly, and community-focused—designed to reflect a relaxed yet enriching experience for anyone passionate about technology.
 
 ---
 
@@ -33,6 +32,4 @@ The event's tone is inclusive, beginner-friendly, and community-focused—design
 - **JavaScript (Vanilla)** – Dynamic behaviors (e.g., dark mode, form handling, modal popup)
 
 ---
-
-## 📁 File Structure
 
